@@ -142,7 +142,7 @@ Now we sweep through different values of `K` to see how the `r` evolves for each
 
 # ╔═╡ 419b9efc-3163-4024-b3fa-9bf755e6b871
 begin
-	evR_N = 500
+	evR_N = 20000
 	evR_ω = randn(evR_N) * 1.5
 	evR_θ₀ = rand(Float64, evR_N) * 2π
 	evR_t = 30
@@ -184,7 +184,7 @@ end
 
 # ╔═╡ f1ea051e-7334-49a4-9211-939834252e68
 md"""
-To see it more clearly, here we plot $r_{\infty}$ vs $K$. As apparent, the threshold is at `K=`$(Kc)
+To see it more clearly, here we plot $r_{\infty}$ vs $K$. As apparent, the threshold is roughly at `K=`$(Kc)
 """
 
 # ╔═╡ ca8abef2-b7db-4f96-b454-745d92722c65
@@ -278,7 +278,7 @@ NNKuramotoPlot(NNSolKuramoto(neighbors_moore, NN_offset_K, NN_offset_ω, NN_offs
 # ╔═╡ 7b12f4ae-2f4d-4b83-905d-66b36160afd1
 md"""
 # References
-[^Nature]: Hu, X., Boccaletti, S., Huang, W. et al. Exact solution for first-order synchronization transition in a generalized Kuramoto model. Sci Rep 4, 7262 (2014). https://doi.org/10.1038/srep07262
+[^Nature]: Hu, X., Boccaletti, S., Huang, W. et al. Exact solution for first-order synchronization transition in a generalized Kuramoto model. Sci Rep 4, 7262 (2014). [https://doi.org/10.1038/srep07262](https://doi.org/10.1038/srep07262)
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
