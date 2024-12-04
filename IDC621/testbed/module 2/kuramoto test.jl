@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.1
+# v0.20.3
 
 using Markdown
 using InteractiveUtils
@@ -175,33 +175,8 @@ end
 plot(non_unif_osc_1)
   ╠═╡ =#
 
-# ╔═╡ ef4439a8-69af-4990-8030-5ed84c6921b0
-# function Kuramoto!(dθ::Vector{Float64}, θ::Vector{Float64}, p@NamedTuple{N::Int, K::Float64, ω::Vector{Float64}}, t::Float64)
-function Kuramoto!(dθ, θ, p, t)
-	N = p.N
-	K = p.K
-	ω = p.ω
-
-	dθ .= ω + ((K/N) * reshape(sum(sin.(θ .- θ'), dims=1), (N,)))
-end
-
-# ╔═╡ 2e97fffd-d97a-4f3b-9ba6-22514a9e3279
-# ╠═╡ disabled = true
-#=╠═╡
-function Kuramoto!(dθ, θ, p, t)
-	N = p.N
-	K = p.K
-	ω = p.ω
-
-	@show dθ
-	for i in 1:N
-		dθ[i] = ω[i] + ((K/N) * sum(sin.(θ .- θ[i])))
-	end
-	@show dθ
-end
-  ╠═╡ =#
-
 # ╔═╡ a60e2e5a-666a-4d40-b880-c65bd529e280
+#=╠═╡
 function SolKuramoto(N, K; ω=randn(N)*2, θ₀=rand(Float64,N)*2π, t=2, step_size=0.01)
 	tspan = (0.0, Float64(t))
 
@@ -212,21 +187,71 @@ function SolKuramoto(N, K; ω=randn(N)*2, θ₀=rand(Float64,N)*2π, t=2, step_s
 	
 	return sol
 end
+  ╠═╡ =#
 
 # ╔═╡ 36aad6c4-ff7e-4dd2-a99b-a35fd5eea5a1
+#=╠═╡
 begin
 	N = 10
 	K = 4
 	kuramoto_sol = SolKuramoto(N, K)
 end;
+  ╠═╡ =#
 
 # ╔═╡ fe2caad6-4d9b-4946-a955-d3e22b11d4e7
+#=╠═╡
 kuramoto_sol
+  ╠═╡ =#
 
 # ╔═╡ a6930178-980c-48fd-a564-d2b5c5adca8a
+#=╠═╡
 PlotOscillators(kuramoto_sol, "./outputs/$(N)_$(K)_unif_osc.gif")
+  ╠═╡ =#
+
+# ╔═╡ eab3693f-6b48-4dec-9b01-46de145309d2
+# ╠═╡ disabled = true
+#=╠═╡
+r_inf
+  ╠═╡ =#
+
+# ╔═╡ 7a49928c-0a30-43b5-a6ff-8371171b372f
+#=╠═╡
+begin
+	plot(varK_fwd, first(r_inf, varK_len))
+	plot!(varK_rev, last(r_inf, varK_len))
+end
+  ╠═╡ =#
+
+# ╔═╡ 37b68192-11e0-4d8a-8617-5fd60a92bba5
+length(varK_rev)
+
+# ╔═╡ 2b4b409b-e57a-4d58-936c-90aa1c961399
+function KuramotoNN!(dθ, θ, p, t)
+	N = p.N
+	K = p.K
+	ω = p.ω
+
+	dθ .= ω + ((K/N) * )
+end
+
+# ╔═╡ d79ef70e-2522-4cc3-a3cb-ed5835a102f5
+begin
+	function mcve2(n,A,B)
+	    p = heatmap(B[1,:,:],aspect_ratio=1,xticks = false,yticks= false)
+	
+	    anim = @animate for i=1:n
+	        p[:z] = B[i,:,:]
+	    end
+	    return gif(anim,"example2.gif")
+	end
+	
+	A = rand(1,100,100)
+	B = rand(1,100,100)
+	mcve2(10,A,B)
+end
 
 # ╔═╡ 7a229400-92e8-41fb-b60e-5e41bc028ade
+#=╠═╡
 begin
 	varK_N = 500 #800
 	varK_step_size = 0.1
@@ -257,11 +282,34 @@ begin
 
 	varK_plot
 end
+  ╠═╡ =#
 
-# ╔═╡ eab3693f-6b48-4dec-9b01-46de145309d2
+# ╔═╡ 2e97fffd-d97a-4f3b-9ba6-22514a9e3279
 # ╠═╡ disabled = true
 #=╠═╡
-r_inf
+function Kuramoto!(dθ, θ, p, t)
+	N = p.N
+	K = p.K
+	ω = p.ω
+
+	@show dθ
+	for i in 1:N
+		dθ[i] = ω[i] + ((K/N) * sum(sin.(θ .- θ[i])))
+	end
+	@show dθ
+end
+  ╠═╡ =#
+
+# ╔═╡ ef4439a8-69af-4990-8030-5ed84c6921b0
+#=╠═╡
+# function Kuramoto!(dθ::Vector{Float64}, θ::Vector{Float64}, p@NamedTuple{N::Int, K::Float64, ω::Vector{Float64}}, t::Float64)
+function Kuramoto!(dθ, θ, p, t)
+	N = p.N
+	K = p.K
+	ω = p.ω
+
+	dθ .= ω + ((K/N) * reshape(sum(sin.(θ .- θ'), dims=1), (N,)))
+end
   ╠═╡ =#
 
 # ╔═╡ 75ca8a9f-a02a-4a0d-9c17-aeaa5152670a
@@ -294,40 +342,6 @@ begin
 	varK_plot
 end
   ╠═╡ =#
-
-# ╔═╡ 7a49928c-0a30-43b5-a6ff-8371171b372f
-begin
-	plot(varK_fwd, first(r_inf, varK_len))
-	plot!(varK_rev, last(r_inf, varK_len))
-end
-
-# ╔═╡ 37b68192-11e0-4d8a-8617-5fd60a92bba5
-length(varK_rev)
-
-# ╔═╡ 2b4b409b-e57a-4d58-936c-90aa1c961399
-function KuramotoNN!(dθ, θ, p, t)
-	N = p.N
-	K = p.K
-	ω = p.ω
-
-	dθ .= ω + ((K/N) * )
-end
-
-# ╔═╡ d79ef70e-2522-4cc3-a3cb-ed5835a102f5
-begin
-	function mcve2(n,A,B)
-	    p = heatmap(B[1,:,:],aspect_ratio=1,xticks = false,yticks= false)
-	
-	    anim = @animate for i=1:n
-	        p[:z] = B[i,:,:]
-	    end
-	    return gif(anim,"example2.gif")
-	end
-	
-	A = rand(1,100,100)
-	B = rand(1,100,100)
-	mcve2(10,A,B)
-end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """

@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.1
+# v0.20.3
 
 using Markdown
 using InteractiveUtils
@@ -80,14 +80,6 @@ function SolKuramoto(N, K, ω, θ₀, t, step_size)
 	return sol
 end
 
-# ╔═╡ bc1dab07-28d8-4073-858d-804e82e51b07
-function GetPhaseData(sol, iter)
-	θs = sol[iter]
-	centroid = mean(exp.(im * θs)) |> (c -> (angle(c), abs(c)))
-
-	return θs, centroid
-end
-
 # ╔═╡ 7e98fd17-0eb5-49a4-a89a-f9e0ecd29709
 function PlotOscillators(sol)
 	N = size(sol)[1]
@@ -103,6 +95,14 @@ function PlotOscillators(sol)
 		scatter!([(θ, 1) for θ in phases], zcolor=1:N)
 		plot!([(0, 0), centroid], marker=:circle, markersize=[0, 8], markercolor=:orange, line=:solid, linecolor=:orange)
 	end
+end
+
+# ╔═╡ bc1dab07-28d8-4073-858d-804e82e51b07
+function GetPhaseData(sol, iter)
+	θs = sol[iter]
+	centroid = mean(exp.(im * θs)) |> (c -> (angle(c), abs(c)))
+
+	return θs, centroid
 end
 
 # ╔═╡ 635e6e00-5587-436b-9e6d-d28a3bf685f3

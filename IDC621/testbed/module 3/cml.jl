@@ -457,6 +457,9 @@ let ϵ = 1, params = (ω = 0.51, k = 6.53)
 	PlotEvolution(EvolvePeriodicCML(ϵ, CM, params; N=100, T=100), title="ϵ=$ϵ, $params")
 end
 
+# ╔═╡ 877a575c-a827-47fa-860b-ca5e7fa2293f
+
+
 # ╔═╡ dd9b0ad2-f891-44e3-81f4-db280e29a432
 md"""
 # Simulation of Boling
@@ -682,9 +685,9 @@ version = "0.7.6"
 
 [[deps.ColorSchemes]]
 deps = ["ColorTypes", "ColorVectorSpace", "Colors", "FixedPointNumbers", "PrecompileTools", "Random"]
-git-tree-sha1 = "13951eb68769ad1cd460cdb2e64e5e95f1bf123d"
+git-tree-sha1 = "c785dfb1b3bfddd1da557e861b919819b82bbe5b"
 uuid = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
-version = "3.27.0"
+version = "3.27.1"
 
 [[deps.ColorTypes]]
 deps = ["FixedPointNumbers", "Random"]
@@ -2060,6 +2063,7 @@ version = "1.4.1+1"
 # ╟─f9bf3561-0f8a-4f0f-a1f0-665fea6509da
 # ╟─4360d9bc-5f7a-459a-b8b9-ab0c6372031d
 # ╠═b2801ff1-da51-4696-af5c-38e018b111e6
+# ╠═877a575c-a827-47fa-860b-ca5e7fa2293f
 # ╟─dd9b0ad2-f891-44e3-81f4-db280e29a432
 # ╟─8e5d3f88-79e3-40d9-b9cc-a4d2e5b14def
 # ╟─fce042e3-ad0d-494c-8ed1-25061c4673f9
