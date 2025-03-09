@@ -124,7 +124,6 @@
                     shellHook = ''
                         unset PYTHONPATH
                         echo "Set default python version with 'uv python pin <version>'"
-                        echo "Add marimo to your project with 'uv add marimo' if needed"
                     '';
                 };
             };
