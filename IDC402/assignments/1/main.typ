@@ -1,4 +1,4 @@
-#import "lib.typ": *
+#import "../lib.typ": *
 
 #show: ilm.with(
   title: [IDC402 \ Assignment - 1],

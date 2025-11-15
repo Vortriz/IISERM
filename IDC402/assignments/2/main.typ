@@ -1,4 +1,4 @@
-#import "lib.typ": *
+#import "../lib.typ": *
 
 #show heading.where(level: 3): it => {
   set block(above: 3em)
