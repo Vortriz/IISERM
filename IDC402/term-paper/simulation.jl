@@ -11,7 +11,7 @@ begin
     import Pkg
 
     # activate the shared project environment
-    Pkg.activate(joinpath(@__DIR__, ".julia", "project"))
+    Pkg.activate(Base.current_project())
     Pkg.instantiate()
 end
 
