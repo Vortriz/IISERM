@@ -29,7 +29,7 @@ After that, install [Pluto.jl](https://plutojl.org/#install).
 Launch a Pluto session in Julia REPL:
 
 ```
-julia> import Pluto; Pluto.run()
+pluto
 ```
 
 and run the desired notebook.
