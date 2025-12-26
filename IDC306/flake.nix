@@ -10,41 +10,45 @@
         };
     };
 
-    outputs = {
-        nixpkgs,
-        devshell,
-        ...
-    }: let
-        inherit (nixpkgs) lib;
+    outputs =
+        {
+            nixpkgs,
+            devshell,
+            ...
+        }:
+        let
+            inherit (nixpkgs) lib;
 
-        # Change accordingly
-        system = "x86_64-linux";
-        pkgs = import nixpkgs {
-            inherit system;
-            overlays = [devshell.overlays.default];
-        };
-    in {
-        formatter.${system} = pkgs.alejandra;
-
-        # Impurely using uv to manage virtual environments
-        devShells.${system}.default = let
-            # Use Python 3.12 from nixpkgs
-            python = pkgs.python312;
+            # Change accordingly
+            system = "x86_64-linux";
+            pkgs = import nixpkgs {
+                inherit system;
+                overlays = [ devshell.overlays.default ];
+            };
         in
-            pkgs.devshell.mkShell
-            {
-                name = "IDC306";
-                devshell.motd = "";
+        {
+            formatter.${system} = pkgs.alejandra;
 
-                packages =
-                        [python]
-                        ++ (with pkgs; [
-                            uv
-                            nodejs
-                            typst
-                        ]);
+            # Impurely using uv to manage virtual environments
+            devShells.${system}.default =
+                let
+                    # Use Python 3.12 from nixpkgs
+                    python = pkgs.python312;
+                in
+                pkgs.devshell.mkShell {
+                    name = "IDC306";
+                    devshell.motd = "";
 
-                env = [
+                    packages = [
+                        python
+                    ]
+                    ++ (with pkgs; [
+                        uv
+                        nodejs
+                        typst
+                    ]);
+
+                    env = [
                         {
                             # Prevent uv from managing Python downloads
                             name = "UV_PYTHON_DOWNLOADS";
@@ -64,15 +68,15 @@
                         }
                     ];
 
-                commands = [
-                    {
-                        help = "Activate the Python virtual environment";
-                        name = "activate";
-                        command = "source .venv/bin/activate.fish";
-                    }
-                ];
+                    commands = [
+                        {
+                            help = "Activate the Python virtual environment";
+                            name = "activate";
+                            command = "source .venv/bin/activate.fish";
+                        }
+                    ];
 
-                devshell.startup.default.text = "unset PYTHONPATH";
-            };
-    };
+                    devshell.startup.default.text = "unset PYTHONPATH";
+                };
+        };
 }
