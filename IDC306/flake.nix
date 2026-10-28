@@ -44,7 +44,7 @@
                     ]
                     ++ (with pkgs; [
                         uv
-                        nodejs
+                        nodejs_latest
                         typst
                     ]);
 
